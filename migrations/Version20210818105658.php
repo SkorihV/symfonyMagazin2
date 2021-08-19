@@ -28,6 +28,7 @@ final class Version20210818105658 extends AbstractMigration
                 sess_time INTEGER NOT NULL
             )
         ');
+        $this->addSql('ALTER TABLE conference ADD COLUMN photoFilename  varchar(255) NULL ');
 
     }
 
