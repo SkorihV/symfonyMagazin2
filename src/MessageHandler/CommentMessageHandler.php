@@ -39,6 +39,7 @@ class CommentMessageHandler implements MessageHandlerInterface
 
     public function __invoke(CommentMessage $message)
     {
+
         $comment = $this->commentRepository->find($message->getId());
         if (!$comment) {
             return;
@@ -56,6 +57,7 @@ class CommentMessageHandler implements MessageHandlerInterface
             $this->entityManager->flush();
 
             $this->bus->dispatch($message);
+
 
         } elseif ($this->workflow->can($comment, 'publish') || $this->workflow->can($comment, 'publish_ham')) {
             $this->mailer->send((new NotificationEmail())
