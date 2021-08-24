@@ -16,6 +16,7 @@ framework:
                 - potential_spam
                 - spam
                 - rejected
+                - ready
                 - published
             transitions:
                 accept:
@@ -29,7 +30,7 @@ framework:
                     to:   spam
                 publish:
                     from: potential_spam
-                    to:   published
+                    to:   ready
                 reject:
                     from: potential_spam
                     to:   rejected
@@ -38,4 +39,7 @@ framework:
                     to:   published
                 reject_ham:
                     from: ham
-                    to:   rejected
+                    to:   ready
+                optimize:
+                    from: ready
+                    to: published
